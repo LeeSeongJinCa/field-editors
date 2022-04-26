@@ -155,7 +155,9 @@ describe('Toolbar', () => {
     }
   });
 
-  it(`hides the ${BLOCKS.EMBEDDED_ASSET} dropdown option when the user has no asset access permissions`, () => {
+  // See fix in `index.js` why we need to show this option always
+  // eslint-disable-next-line jest/no-disabled-tests
+  it.skip(`hides the ${BLOCKS.EMBEDDED_ASSET} dropdown option when the user has no asset access permissions`, () => {
     const props = fakeProps();
     props.richTextAPI.sdk.access.can = jest.fn().mockResolvedValue(false);
     props.richTextAPI.sdk.field.validations = [
