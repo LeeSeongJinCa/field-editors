@@ -14,6 +14,7 @@ export interface ReferenceEditorProps {
    * Whether or not the field should be disabled initially.
    */
   isInitiallyDisabled: boolean;
+  hasActions?: boolean;
   hasCardEditActions: boolean;
   sdk: FieldExtensionSDK;
   viewType: ViewType;

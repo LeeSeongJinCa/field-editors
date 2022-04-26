@@ -16,6 +16,7 @@ export type EntryCardReferenceEditorProps = ReferenceEditorProps & {
   isDisabled: boolean;
   onRemove: () => void;
   renderDragHandle?: RenderDragFn;
+  hasActions?: boolean;
   hasCardEditActions: boolean;
   onMoveTop?: () => void;
   onMoveBottom?: () => void;
@@ -141,12 +142,13 @@ export function FetchingWrappedEntryCard(props: EntryCardReferenceEditorProps) {
       onMoveBottom: props.onMoveBottom,
     };
 
-    const { hasCardEditActions } = props;
+    const { hasActions, hasCardEditActions } = props;
 
     function renderDefaultCard(props?: CustomEntityCardProps) {
       const builtinCardProps: WrappedEntryCardProps = {
         ...sharedCardProps,
         ...props,
+        hasActions: hasActions,
         hasCardEditActions: hasCardEditActions,
         getAsset: getOrLoadAsset,
         getEntityScheduledActions: loadEntityScheduledActions,

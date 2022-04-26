@@ -37,12 +37,14 @@ export interface WrappedEntryCardProps {
   onMoveTop?: () => void;
   onMoveBottom?: () => void;
   hasMoveOptions?: boolean;
+  hasActions?: boolean;
 }
 
 const defaultProps = {
   isClickable: true,
   hasCardEditActions: true,
   hasMoveOptions: true,
+  hasActions: true,
 };
 
 export function WrappedEntryCard(props: WrappedEntryCardProps) {
@@ -124,44 +126,46 @@ export function WrappedEntryCard(props: WrappedEntryCardProps) {
       dragHandleRender={props.renderDragHandle}
       withDragHandle={!!props.renderDragHandle}
       actions={
-        props.onEdit || props.onRemove
-          ? [
-              props.hasCardEditActions && props.onEdit ? (
-                <MenuItem
-                  key="edit"
-                  testId="edit"
-                  onClick={() => {
-                    props.onEdit && props.onEdit();
-                  }}>
-                  Edit
-                </MenuItem>
-              ) : null,
-              props.onRemove ? (
-                <MenuItem
-                  key="delete"
-                  testId="delete"
-                  onClick={() => {
-                    props.onRemove && props.onRemove();
-                  }}>
-                  Remove
-                </MenuItem>
-              ) : null,
-              props.hasMoveOptions && (props.onMoveTop || props.onMoveBottom) ? (
-                <MenuDivider />
-              ) : null,
-              props.hasMoveOptions && props.onMoveTop ? (
-                <MenuItem onClick={() => props.onMoveTop && props.onMoveTop()} testId="move-top">
-                  Move to top
-                </MenuItem>
-              ) : null,
-              props.hasMoveOptions && props.onMoveBottom ? (
-                <MenuItem
-                  onClick={() => props.onMoveBottom && props.onMoveBottom()}
-                  testId="move-bottom">
-                  Move to bottom
-                </MenuItem>
-              ) : null,
-            ].filter((item) => item)
+        props.hasActions
+          ? props.onEdit || props.onRemove
+            ? [
+                props.hasCardEditActions && props.onEdit ? (
+                  <MenuItem
+                    key="edit"
+                    testId="edit"
+                    onClick={() => {
+                      props.onEdit && props.onEdit();
+                    }}>
+                    Edit
+                  </MenuItem>
+                ) : null,
+                props.onRemove ? (
+                  <MenuItem
+                    key="delete"
+                    testId="delete"
+                    onClick={() => {
+                      props.onRemove && props.onRemove();
+                    }}>
+                    Remove
+                  </MenuItem>
+                ) : null,
+                props.hasMoveOptions && (props.onMoveTop || props.onMoveBottom) ? (
+                  <MenuDivider />
+                ) : null,
+                props.hasMoveOptions && props.onMoveTop ? (
+                  <MenuItem onClick={() => props.onMoveTop && props.onMoveTop()} testId="move-top">
+                    Move to top
+                  </MenuItem>
+                ) : null,
+                props.hasMoveOptions && props.onMoveBottom ? (
+                  <MenuItem
+                    onClick={() => props.onMoveBottom && props.onMoveBottom()}
+                    testId="move-bottom">
+                    Move to bottom
+                  </MenuItem>
+                ) : null,
+              ].filter((item) => item)
+            : []
           : []
       }
       onClick={(e: React.MouseEvent<HTMLElement>) => {
