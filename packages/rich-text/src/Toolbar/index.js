@@ -88,13 +88,14 @@ export default class Toolbar extends React.Component {
 
   componentDidMount() {
     this.hasMounted = true;
-    // TODO: See comment above about hardcoded `true` value
-    // this.props.richTextAPI.sdk.access.can('read', 'Asset').then((canReadAssets) => {
-    //   if (this.hasMounted) {
-    //     // Prevent setting state on unmounted component
-    //     this.setState({ canAccessAssets: canReadAssets });
-    //   }
-    // });
+    // TODO: See comment above about hardcoded `true` value, still we call `access.can` for monitoring reasons
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    this.props.richTextAPI.sdk.access.can('read', 'Asset').then((canReadAssets) => {
+      /* if (this.hasMounted) {
+        // Prevent setting state on unmounted component
+        this.setState({ canAccessAssets: canReadAssets });
+      } */
+    });
   }
 
   componentWillUnmount() {
