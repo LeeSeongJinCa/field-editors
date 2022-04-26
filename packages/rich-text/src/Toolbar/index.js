@@ -80,18 +80,21 @@ export default class Toolbar extends React.Component {
 
   state = {
     headingMenuOpen: false,
-    canAccessAssets: false,
+    // Hardcoded `true` value following https://contentful.atlassian.net/browse/DANTE-486
+    // TODO: refine permissions check in order to account for tags in rules
+    canAccessAssets: true,
     ...getValidationInfo(this.props.richTextAPI.sdk.field),
   };
 
   componentDidMount() {
     this.hasMounted = true;
-    this.props.richTextAPI.sdk.access.can('read', 'Asset').then((canReadAssets) => {
-      if (this.hasMounted) {
-        // Prevent setting state on unmounted component
-        this.setState({ canAccessAssets: canReadAssets });
-      }
-    });
+    // TODO: See comment above about hardcoded `true` value
+    // this.props.richTextAPI.sdk.access.can('read', 'Asset').then((canReadAssets) => {
+    //   if (this.hasMounted) {
+    //     // Prevent setting state on unmounted component
+    //     this.setState({ canAccessAssets: canReadAssets });
+    //   }
+    // });
   }
 
   componentWillUnmount() {
